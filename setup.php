@@ -56,3 +56,51 @@ function plugin_check_prerequisites() {
 function plugin_check_config() {
    return true;
 }
+
+function plugin_mybranding_install() {
+   global $DB;
+
+   // Create configuration table if it doesn't exist
+   $table = 'glpi_plugin_mybranding_configs';
+   if (!$DB->tableExists($table)) {
+      $query = "CREATE TABLE `$table` (
+         `id` INT NOT NULL AUTO_INCREMENT,
+         `enable_branding` TINYINT NOT NULL DEFAULT '1',
+         `sidebar_color` VARCHAR(7) NOT NULL DEFAULT '#1a73e8',
+         PRIMARY KEY (`id`)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+      
+      if (!$DB->query($query)) {
+         PluginMybrandingLogger::log('Failed to create table: ' . $DB->error());
+         return false;
+      }
+
+      // Insert default configuration
+      $query = "INSERT INTO `$table` (`id`, `enable_branding`, `sidebar_color`)
+                VALUES (1, 1, '#1a73e8')";
+      if (!$DB->query($query)) {
+         PluginMybrandingLogger::log('Failed to insert default config: ' . $DB->error());
+         return false;
+      }
+   }
+
+   PluginMybrandingLogger::log('Plugin MyBranding installed successfully');
+   return true;
+}
+
+function plugin_mybranding_uninstall() {
+   global $DB;
+
+   // Drop configuration table
+   $table = 'glpi_plugin_mybranding_configs';
+   if ($DB->tableExists($table)) {
+      $query = "DROP TABLE `$table`";
+      if (!$DB->query($query)) {
+         PluginMybrandingLogger::log('Failed to drop table: ' . $DB->error());
+         return false;
+      }
+   }
+
+   PluginMybrandingLogger::log('Plugin MyBranding uninstalled successfully');
+   return true;
+}
