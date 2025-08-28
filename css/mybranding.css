@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Apply custom font */
+body {
+   font-family: 'Roboto', sans-serif !important;
+}
+
+/* Sidebar logo (expanded) */
+.page .glpi-logo {
+   background: url('../images/logo.png') no-repeat !important;
+   background-size: 120px 60px !important;
+   height: 60px;
+   width: 120px;
+}
+
+/* Sidebar logo (collapsed) */
+.page .glpi-logo-collapsed {
+   background: url('../images/logo_collapsed.png') no-repeat !important;
+   background-size: 40px 40px !important;
+   height: 40px;
+   width: 40px;
+}
+
+/* Login page logo */
+body.welcome-anonymous .glpi-logo {
+   content: url('../images/login_logo.png') !important;
+   height: 200px;
+   width: 200px;
+   margin: 0 auto;
+}
+
+/* Login page background with gradient overlay */
+body.welcome-anonymous {
+   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/login_background.jpg') no-repeat center center fixed !important;
+   background-size: cover !important;
+}
+
+/* Sidebar gradient */
+.navbar-nav {
+   background: linear-gradient(135deg, #1a73e8, #34c759) !important;
+}
+
+/* Sidebar text color */
+.navbar-nav .nav-link {
+   color: #ffffff !important;
+}
+
+/* Active sidebar item */
+.navbar-nav .nav-link.active {
+   background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Card gradient */
+.card-body {
+   background: linear-gradient(to bottom, #f0f4f8, #d1e0ff) !important;
+}
+
+/* Button styles */
+.btn-primary {
+   background: linear-gradient(45deg, #ff6f61, #ffb347) !important;
+   border: none !important;
+   border-radius: 8px !important;
+   color: #ffffff !important;
+   transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+   transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+   .page .glpi-logo {
+      background-size: 80px 40px !important;
+      height: 40px;
+      width: 80px;
+   }
+   body.welcome-anonymous .glpi-logo {
+      height: 150px;
+      width: 150px;
+   }
+}
