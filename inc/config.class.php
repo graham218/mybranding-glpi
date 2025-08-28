@@ -19,9 +19,14 @@ class PluginMybrandingConfig extends CommonDBTM {
    }
 
    static function showConfigForm() {
-      global $CFG_GLPI;
+      global $CFG_GLPI, $DB;
 
       $config = new self();
+      if (!$DB->tableExists('glpi_plugin_mybranding_configs')) {
+         PluginMybrandingLogger::log('Configuration table not found');
+         return false;
+      }
+
       $config->getFromDB(1);
       if (!$config->fields) {
          $config->fields = [
